@@ -1,0 +1,219 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * ATELIER TERRA — architectural design system.
+ * Palette: travertine, oak, linen, concrete, brass, warm architectural light.
+ * All colors are oklch tokens; components must never hardcode colors.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 2px);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --font-display: "Cormorant Garamond", "Times New Roman", serif;
+  --font-sans: "Manrope", system-ui, sans-serif;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* architectural material tokens */
+  --color-ink: var(--ink);
+  --color-charcoal: var(--charcoal);
+  --color-warm-white: var(--warm-white);
+  --color-sand: var(--sand);
+  --color-stone: var(--stone);
+  --color-taupe: var(--taupe);
+  --color-bronze: var(--bronze);
+  --color-brass: var(--brass);
+}
+
+:root {
+  --radius: 0.125rem;
+
+  --background: oklch(0.955 0.008 85);
+  --foreground: oklch(0.255 0.007 75);
+  --card: oklch(0.978 0.006 85);
+  --card-foreground: oklch(0.255 0.007 75);
+  --popover: oklch(0.978 0.006 85);
+  --popover-foreground: oklch(0.255 0.007 75);
+  --primary: oklch(0.223 0.003 90);
+  --primary-foreground: oklch(0.978 0.006 85);
+  --secondary: oklch(0.895 0.016 80);
+  --secondary-foreground: oklch(0.255 0.007 75);
+  --muted: oklch(0.895 0.016 80);
+  --muted-foreground: oklch(0.565 0.021 75);
+  --accent: oklch(0.658 0.055 78);
+  --accent-foreground: oklch(0.163 0.003 90);
+  --destructive: oklch(0.505 0.14 30);
+  --destructive-foreground: oklch(0.978 0.006 85);
+  --border: oklch(0.847 0.016 80);
+  --input: oklch(0.847 0.016 80);
+  --ring: oklch(0.658 0.055 78);
+
+  --ink: oklch(0.163 0.003 90);
+  --charcoal: oklch(0.223 0.003 90);
+  --warm-white: oklch(0.978 0.006 85);
+  --sand: oklch(0.895 0.016 80);
+  --stone: oklch(0.847 0.016 80);
+  --taupe: oklch(0.715 0.021 75);
+  --bronze: oklch(0.612 0.049 70);
+  --brass: oklch(0.658 0.055 78);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  blockquote {
+    font-family: var(--font-display);
+    font-weight: 300;
+    letter-spacing: -0.015em;
+  }
+
+  ::selection {
+    background-color: var(--color-brass);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 1px solid var(--color-brass);
+    outline-offset: 3px;
+  }
+}
+
+/* ---------- editorial utilities ---------- */
+
+@utility eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+}
+
+@utility display-xl {
+  font-family: var(--font-display);
+  font-weight: 300;
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  font-size: clamp(2.75rem, 9vw, 9.5rem);
+}
+
+@utility display-lg {
+  font-family: var(--font-display);
+  font-weight: 300;
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  font-size: clamp(2.25rem, 5.4vw, 5.25rem);
+}
+
+@utility display-md {
+  font-family: var(--font-display);
+  font-weight: 300;
+  line-height: 1.05;
+  font-size: clamp(1.75rem, 3.2vw, 3rem);
+}
+
+@utility body-lg {
+  font-size: clamp(1rem, 1.15vw, 1.1875rem);
+  line-height: 1.75;
+  font-weight: 300;
+  color: var(--color-muted-foreground);
+}
+
+@utility rule-line {
+  height: 1px;
+  background-color: var(--color-border);
+}
+
+/* image reveal: clip-path curtain, driven by gsap or CSS */
+@utility reveal-clip {
+  clip-path: inset(0 0 100% 0);
+  will-change: clip-path;
+}
+
+@utility grain-overlay {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.045;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+}
+
+@utility link-underline {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    height: 1px;
+    width: 100%;
+    background-color: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  &:hover::after {
+    transform: scaleX(1);
+  }
+}
+
+@utility no-cursor {
+  @media (pointer: fine) {
+    cursor: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
